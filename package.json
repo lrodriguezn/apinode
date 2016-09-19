@@ -1,0 +1,14 @@
+{
+  "name": "apirest",
+  "version": "0.0.1",
+  "description": "apisql",
+  "main": "server.js",
+  "dependencies": {
+    "body-parser": "latest",
+    "cors": "^2.8.0",
+    "express": "latest",
+    "method-override": "latest",
+    "mongoose": "latest",
+    "mssql": "latest"
+  }
+}
