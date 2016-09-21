@@ -9,6 +9,9 @@
     "express": "latest",
     "method-override": "latest",
     "mongoose": "latest",
-    "mssql": "latest"
+    "mssql": "latest",
+     "jsonwebtoken": "latest",
+     "morgan": "latest"
   }
 }
+
