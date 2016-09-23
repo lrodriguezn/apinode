@@ -8,8 +8,8 @@ var express     = require('express'),
 
 app.set('port', (process.env.PORT || 5000));
 
-var dbconnect=process.env.MONGO_URL_LOCAL; //base local
-//var dbconnect=process.env.MONGO_URL; //base de datos alojada en mLab
+//var dbconnect=process.env.MONGO_URL_LOCAL; //base local
+var dbconnect=process.env.MONGO_URL; //base de datos alojada en mLab
 
 // Connection to DB
 mongoose.connect(dbconnect, function(err, res) {
