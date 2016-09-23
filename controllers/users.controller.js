@@ -1,68 +1,149 @@
 //File: controllers/userctrl.js
 var mongoose = require('mongoose');
 var User  = mongoose.model('users');
-var jwt   = require("jsonwebtoken");
+var jwt   = require("jsonwebtoken"); //https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
+var moment = require('moment'); 
 
 exports.signin = function(req, res) {
-    User.findOne({identity:req.body.identity,
-                    password: req.body.password
-                    },function(err, user){
+    try 
+    {
+        var usertoken = jwt.sign({ login:  req.body.login }, process.env.JWT_SECRET);
+        var passEncriptada = encrypt(req.body.identity+req.body.login, req.body.password);
+        User.findOne({login:req.body.login},function(err, user)
+        {
             if (err) {
                 res.json({
-                    type: false,
+                    success: false,
                     data: "Error occured: " + err
                 });
-            } else {
-                if (user) {
+            } 
+            else 
+            {
+                if (user) 
+                {
                     res.json({
-                        type: false,
+                        success: false,
                         data: "User already exists!"
                     });
-                } else {
-                    
+                } 
+                else 
+                {
                     var userModel = new User();
                         userModel.identity=req.body.identity,
                         userModel.login=req.body.login,
                         userModel.first_name=req.body.first_name,
                         userModel.last_name=req.body.last_name,
                         userModel.email=req.body.email,
-                        userModel.password=req.body.password,
-                    userModel.save(function(err, user) {
-                        user.token = jwt.sign(user, process.env.JWT_SECRET);
-                        user.save(function(err, user1) {
-                            res.json({
-                                type: true,
-                                data: user1,
-                                token: user1.token
+                        userModel.password=passEncriptada;
+                        
+                        userModel.save(function(err, user) 
+                        {
+                            user.save(function(err, user1) 
+                            {
+                                res.json({
+                                    success: true,
+                                    data: user1,
+                                    token: usertoken
+                                });
+
                             });
-                        });
-                    })
+                        })
                 }
             }        
-    });
+        });
+        
+    }     
+    catch (error) 
+    {
+        res.json({
+            success: false,
+            data: "Error signin... " + error
+        });
+    }
+
 
 };
 
 exports.authenticate = function(req, res) {
-    User.findOne({identity: req.body.identity, password: req.body.password}, function(err, user) {
-        if (err) {
-            res.json({
-                type: false,
-                data: "Error occured: " + err
-            });
-        } else {
-            if (user) {
-               res.json({
-                    type: true,
-                    data: user,
-                    token: user.token
-                }); 
-            } else {
+    try {
+
+        var usertoken = jwt.sign({ login:  req.body.login }, process.env.JWT_SECRET);
+        var passEncriptada = encrypt(req.body.identity+req.body.login, req.body.password);
+
+        User.findOne({login: req.body.login}, function(err, user) {
+            if (err) 
+            {
                 res.json({
-                    type: false,
-                    data: "Incorrect email/password"
-                });    
+                    success: false,
+                    data: "Error occured: " + err
+                });
             }
-        }
-    });   
+            else
+            {
+                if (user) 
+                {
+                    if (user.password==passEncriptada)
+                    {   
+                        /*
+                        var usertoken;
+                        //jwt.sign(user.login, process.env.JWT_SECRET,{expiresIn:"10h"}, function(err, token) {
+                        jwt.sign(user.login, process.env.JWT_SECRET, function(err, token) 
+                        {
+                            if(err)
+                            {
+                                return res.json({
+                                            success: false,
+                                            data: "Error process token. " + err
+                                        });
+                            }
+                            usertoken=token;
+                        });
+                        */
+
+                        res.json({
+                            success: true,
+                            data: user,
+                            token:usertoken
+                        });
+                    }
+                    else
+                    {
+                        res.json({
+                                success: false,
+                                data: "Incorrect pass"
+                            }); 
+                    }
+                    
+                }
+                else
+                {
+                    res.json({
+                        success: false,
+                        data: "Incorrect login"
+                    });                     
+                }
+            }
+
+        });   
+        
+    } 
+    catch (error) 
+    {
+        res.json({
+            success: false,
+            data: "Error authenticate... " + error
+        });
+    }
 };
+
+
+function encrypt(userid, pass) {
+   var crypto = require('crypto')
+   // usamos el metodo CreateHmac y le pasamos el parametro userid y actualizamos el hash con la password
+   var hmac = crypto.createHmac('sha1', userid).update(pass).digest('hex')
+   return hmac
+}
+
+function createToken(user) {
+   return jwt.sign(user.login, process.env.JWT_SECRET,{expiresIn:"10h"});
+}
