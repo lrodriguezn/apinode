@@ -8,7 +8,7 @@ exports.signin = function(req, res) {
     try 
     {
         var usertoken = jwt.sign({ login:  req.body.login }, process.env.JWT_SECRET);
-        var passEncriptada = encrypt(req.body.identity+req.body.login, req.body.password);
+        var passEncriptada = encrypt(req.body.login, req.body.password);
         User.findOne({login:req.body.login},function(err, user)
         {
             if (err) {
@@ -68,7 +68,7 @@ exports.authenticate = function(req, res) {
     try {
 
         var usertoken = jwt.sign({ login:  req.body.login }, process.env.JWT_SECRET);
-        var passEncriptada = encrypt(req.body.identity+req.body.login, req.body.password);
+        var passEncriptada = encrypt(req.body.login, req.body.password);
 
         User.findOne({login: req.body.login}, function(err, user) {
             if (err) 
