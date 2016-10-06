@@ -111,8 +111,6 @@ exports.authenticate = function(req, res) {
                 {
                     handleError(res, "Incorrect login!", "Incorrect login!",200);
                 }
-
-                
             }
         });
         
