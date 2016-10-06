@@ -45,7 +45,7 @@ exports.signin = function(req, res) {
             {
                 if (user)
                 {
-                    handleError(res, "User already exists!", "User already exists!");
+                    handleError(res, "User already exists!", "User already exists!",200);
                 }
                 else
                 {
@@ -103,12 +103,12 @@ exports.authenticate = function(req, res) {
                     }
                     else
                     {
-                        handleError(res, "Incorrect password!", "Incorrect password!");
+                        handleError(res, "Incorrect password!", "Incorrect password!",200);
                     }
                 }
                 else
                 {
-                    handleError(res, "Incorrect login!", "Incorrect login!");
+                    handleError(res, "Incorrect login!", "Incorrect login!",200);
                 }
 
                 
@@ -139,7 +139,7 @@ exports.updateuser = function(req, res) {
                 {
                     if (err) 
                     {
-                        handleError(res, err.message, "Failed to authenticate user.");
+                        handleError(res, err.message, "Failed to authenticate user.",200);
                     } 
                     else 
                     {
@@ -149,7 +149,7 @@ exports.updateuser = function(req, res) {
                             db.collection(USER_COLLECTION).updateOne({_id: user._id}, user, function(err, doc) {
                                 if (err) 
                                 {
-                                    handleError(res, err.message, "Failed to update user");
+                                    handleError(res, err.message, "Failed to update user",200);
                                 } 
                                 else 
                                 {
@@ -159,7 +159,7 @@ exports.updateuser = function(req, res) {
                         }
                         else
                         {
-                            handleError(res, "Incorrect user!", "Incorrect user!");
+                            handleError(res, "Incorrect user!", "Incorrect user!",200);
                         }
 
                         
