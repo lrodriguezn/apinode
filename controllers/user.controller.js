@@ -34,6 +34,7 @@ exports.signin = function(req, res) {
         newUser.createDate = new Date();
         newUser.login=req.body.login.toLowerCase();
         newUser.password=passEncriptada;
+        newUser.confirmpassword="";
 
         db.collection(USER_COLLECTION).findOne({login:req.body.login.toLowerCase()},function(err, user) 
         {
@@ -57,7 +58,7 @@ exports.signin = function(req, res) {
                         } 
                         else 
                         {
-                            res.status(201).json({success: true,data:doc.ops[0],token:usertoken});
+                            res.status(201).json({success: true,data:usertoken});
                         }
                     });       
                 }
@@ -99,7 +100,7 @@ exports.authenticate = function(req, res) {
                 {
                     if (user.password==passEncriptada)
                     {
-                        res.status(200).json({success: true,data:user,token:usertoken});
+                        res.status(200).json({success: true,data:usertoken});
                     }
                     else
                     {
@@ -139,7 +140,7 @@ exports.updateuser = function(req, res) {
                 {
                     if (err) 
                     {
-                        handleError(res, err.message, "Failed to authenticate user.",200);
+                        handleError(res, err.message, "Failed to authenticate user.");
                     } 
                     else 
                     {
@@ -149,7 +150,7 @@ exports.updateuser = function(req, res) {
                             db.collection(USER_COLLECTION).updateOne({_id: user._id}, user, function(err, doc) {
                                 if (err) 
                                 {
-                                    handleError(res, err.message, "Failed to update user",200);
+                                    handleError(res, err.message, "Failed to update user");
                                 } 
                                 else 
                                 {
