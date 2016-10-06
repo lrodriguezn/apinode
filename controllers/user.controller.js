@@ -58,7 +58,7 @@ exports.signin = function(req, res) {
                         } 
                         else 
                         {
-                            res.status(201).json({success: true,data:doc._id,token:usertoken});
+                            res.status(201).json({success: true, data:doc._id, token:usertoken});
                         }
                     });       
                 }
