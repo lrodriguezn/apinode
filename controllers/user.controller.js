@@ -58,7 +58,7 @@ exports.signin = function(req, res) {
                         } 
                         else 
                         {
-                            res.status(201).json({success: true,data:usertoken});
+                            res.status(201).json({success: true,data:doc._id,token:usertoken});
                         }
                     });       
                 }
@@ -100,7 +100,7 @@ exports.authenticate = function(req, res) {
                 {
                     if (user.password==passEncriptada)
                     {
-                        res.status(200).json({success: true,data:usertoken});
+                        res.status(200).json({success: true,data:doc._id,token:usertoken});
                     }
                     else
                     {
