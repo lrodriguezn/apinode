@@ -1,6 +1,7 @@
 //File: controllers/userctrl.js
 var mongoose = require('mongoose');
 var User  = mongoose.model('users');
+var Club  = mongoose.model('clubs');
 var jwt   = require("jsonwebtoken"); //https://www.npmjs.com/package/jsonwebtoken#jwtsignpayload-secretorprivatekey-options-callback
 var moment = require('moment'); 
 
@@ -28,6 +29,12 @@ exports.signin = function(req, res) {
                 } 
                 else 
                 {
+                    var userModel = new User(req.body);
+                    //var clubModel = new Club(req.body.clubs);
+    
+                    //userModel.clubs=clubModel;
+                    
+                    
                     var userModel = new User();
                         userModel.identity=req.body.identity,
                         userModel.login=req.body.login,
@@ -35,7 +42,9 @@ exports.signin = function(req, res) {
                         userModel.last_name=req.body.last_name,
                         userModel.email=req.body.email,
                         userModel.password=passEncriptada;
-                        
+						userModel.clubs=JSON.stringify(req.body.clubs);
+                       
+
                         userModel.save(function(err, user) 
                         {
                             user.save(function(err, user1) 

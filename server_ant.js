@@ -1,18 +1,24 @@
 var express     = require('express'),
-    app         = express(),
+	  app         = express(),
     bodyParser  = require("body-parser"),
     methodOverride  = require("method-override"),
-    mongodb = require("mongodb"),
+    mongoose  = require('mongoose'),
     morgan     = require("morgan"),
-    path = require("path"),
     jwt   = require("jsonwebtoken");
 
-var ObjectID = mongodb.ObjectID;
-
-//var dbconnect=process.env.MONGO_URL_LOCAL; //base local
-var dbconnect=process.env.MONGO_URL; //base de datos alojada en mLab
-
 app.set('port', (process.env.PORT || 5000));
+
+var dbconnect=process.env.MONGO_URL_LOCAL; //base local
+//var dbconnect=process.env.MONGO_URL; //base de datos alojada en mLab
+
+// Connection to DB
+mongoose.connect(dbconnect, function(err, res) {
+  if(err){
+    console.log(dbconnect); 
+    throw err;
+  } 
+  console.log('Connected to Database:' + dbconnect);
+});
 
 // Middlewares
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -26,32 +32,9 @@ app.use(function(req, res, next) {
     next();
 });
 
-// Create a database variable outside of the database connection callback to reuse the connection pool in your app.
-var db;
-
-// Connect to the database before starting the application server.
-mongodb.MongoClient.connect(dbconnect, function (err, database) {
-  if (err) {
-    console.log(err);
-    process.exit(1);
-  }
-
-  // Save database object from the callback for reuse.
-  db = database;
-  global.db=database;
-  console.log("Database connection ready");
-
-  // Initialize the app.
-    // Start server
-    app.listen(app.get('port'), function() {
-        console.log('Node app is running on port', app.get('port'));
-    });
-});
-
-
 // Import Models and controllers
 var user     = require('./models/users');
-var UsersCtrl = require('./controllers/user.controller');
+var UsersCtrl = require('./controllers/users.controller');
 var ClubsCtrl = require('./controllers/clubs.controller');
 
 // Probar router
@@ -64,12 +47,14 @@ app.use(router);
 // API routes users
 var RouterUsers = express.Router();
 RouterUsers.post('/signin',UsersCtrl.signin);
+//RouterUsers.post('/authenticate',UsersCtrl.authenticate);
+//RouterUsers.route('/signin').post(UsersCtrl.signin);
 RouterUsers.route('/authenticate').post(UsersCtrl.authenticate);
-RouterUsers.put('/updateuser',ensureAuthorized,UsersCtrl.updateuser);
 app.use('/user', RouterUsers);
 
 // API routes Clubs publicas
 var RouterClubs = express.Router();
+//RouterClubs.route('/listclubs').get(ClubsCtrl.list_clubs);
 RouterClubs.get('/listclubs',ClubsCtrl.list_clubs);
 
 // API routes Clubs privadas se valida con token. Route Middleware
@@ -78,6 +63,11 @@ app.use('/clubs', RouterClubs);
 
 process.on('uncaughtException', function(err) {
     console.log(err);
+});
+
+// Start server
+app.listen(app.get('port'), function() {
+  console.log('Node app is running on port', app.get('port'));
 });
 
 function ensureAuthorized(req, res, next) {
@@ -90,17 +80,18 @@ function ensureAuthorized(req, res, next) {
 
       var decoded = jwt.verify(token, process.env.JWT_SECRET,{complete: true});
 
+      console.log("payload:" + decoded.login)
+
     } catch(err) {
           return res.json({
               success: false,
-              error: "Error verify token: " + err
+              data: "Error verify token: " + err
           });    
     }
     next();
   }
   else{
-    return res.json({ success: false, error: 'There is no authenticate token' });
+    return res.json({ success: false, data: 'There is no authenticate token' });
   }
   
 }
-
