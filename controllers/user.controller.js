@@ -98,9 +98,10 @@ exports.authenticate = function(req, res) {
             {
                 if (user)
                 {
+                    
                     if (user.password==passEncriptada)
                     {
-                        res.status(201).json({success: true, data:doc.ops[0]._id, token:usertoken});
+                        res.status(201).json({success: true, data:user, id:user._id, token:usertoken});
                     }
                     else
                     {
