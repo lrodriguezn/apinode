@@ -5,6 +5,7 @@ exports.list_clubs = function(req, res) {
     console.log("procesando...." + t);
    //fs.readFile(__dirname + "/data/" + "clubs.json", 'utf8', function (err, data) {
     fs.readFile(__dirname + '/../data/clubs.json', 'utf8', function (err, data) {
+      
 	  res.header("Content-Type", "application/json");
       res.end(data);
    });    

@@ -12,7 +12,8 @@
 		"urlImage": "http://www.clubcampestredecali.com/sites/default/files/galeria/hotel-2.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},
 	{	"code": "002",
 		"name": "Club Guaymaral",
@@ -27,7 +28,8 @@
 		"urlImage": "https://media-cdn.tripadvisor.com/media/photo-s/02/d0/95/04/club-campestre-guaymaral.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},
 	{	"code": "003",
 		"name": "Club El Rodeo",
@@ -42,7 +44,8 @@
 		"urlImage": "http://www.aeroptica.com/wp-content/uploads/2013/10/DJI_00161.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},
 	{	"code": "004",
 		"name": "Karibana",
@@ -57,7 +60,8 @@
 		"urlImage": "http://www.tpc.com/tpc/images/67/_header-hole-14.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},
 	{	"code": "005",
 		"name": "Club Farallones",
@@ -72,7 +76,8 @@
 		"urlImage": "http://static.panoramio.com/photos/original/1585055.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},  
 	{	"code": "006",
 		"name": "Club Cartagena",
@@ -87,7 +92,8 @@
 		"urlImage": "http://www.clubcartagena.com/galerias/contactenos_fotos_images/01.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	}, 
 	{	"code": "007",
 		"name": "Country Club de Barranquilla",
@@ -102,7 +108,8 @@
 		"urlImage": "http://country.com.co/w6/images/2016/06/Slider-5-1960x550.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},  
 	{	"code": "008",
 		"name": "Club Colombia",
@@ -117,7 +124,8 @@
 		"urlImage": "https://www.planciudad.com/core/wp-content/uploads/2015/12/club-colombia-800x683.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},   
 	{	"code": "009",
 		"name": "Contry Club Mesa de Yeguas",
@@ -132,7 +140,8 @@
 		"urlImage": "http://webmanimator.com/luxury-villas/fotos/villa42/DSC00001-a.JPG",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},  
 	{	"code": "010",
 		"name": "Anapoima Club Campestre",
@@ -147,7 +156,8 @@
 		"urlImage": "http://static.wixstatic.com/media/c15645_cfb1019a9c994652a2557762ea43f9fc.jpg_srz_980_403_85_22_0.50_1.20_0.00_jpg_srz",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},  
 	{	"code": "011",
 		"name": "Club Altos de Chicala",
@@ -162,7 +172,8 @@
 		"urlImage": "http://www.altosdelchicala.net/images/stories/galeria/imge%2033.jpg",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	},
 	{	"code": "012",
 		"name": "Pueblo Viejo Country Club",
@@ -177,6 +188,7 @@
 		"urlImage": "http://media.gettyimages.com/photos/course-scenic-view-of-the-18th-hole-green-during-the-final-round-of-picture-id460193414",
 		"location" : "",
 		"active": false,
-		"galery":[]
+		"galery":[],
+		"app":[{"name":"clubes","urlApi": ""},{"name":"hotel","urlApi": ""},{"name":"nomina","urlApi": ""}]
 	}
 ]
